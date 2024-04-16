@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Iris Project</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <style>
+        body {
+            background-image: url('../static/iris-flowers.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+    
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    
+    
+    
+    <!-- Custom styles for this template -->
+    <link href="../static/css/iris.css" rel="stylesheet">
+</head>
+<body>
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark text-white">
+        <h5 class="my-0 mr-md-auto font-weight-normal">IRIS FLOWER CLASSIFICATION</h5>
+    </div>
+
+    {% if setosa %}
+        <div class="alert alert-primary">{{setosa}}</div>
+    {% elif versicolor %}
+        <div class="alert alert-primary">{{versicolor}}</div>
+    {% elif virginica %}
+        <div class="alert alert-primary">{{virginica}}</div>
+    {% endif %}
+
+    <div class="container p-3 my-3 bg-secondary text-white">
+        <!-- Form for user input -->
+<form class="form-group" action="/" method="POST">
+    <label for="sepallength">Sepal Length (cm):</label>
+    <input class="form-control" type="text" name="sepallength" pattern="\d+(\.\d+)?" title="Please enter a decimal number" required>
+    
+    <label for="sepalwidth">Sepal Width (cm):</label>
+    <input class="form-control" type="text" name="sepalwidth" pattern="\d+(\.\d+)?" title="Please enter a decimal number" required>
+    
+    <label for="petallength">Petal Length (cm):</label>
+    <input class="form-control" type="text" name="petallength" pattern="\d+(\.\d+)?" title="Please enter a decimal number" required>
+    
+    <label for="petalwidth">Petal Width (cm):</label>
+    <input class="form-control" type="text" name="petalwidth" pattern="\d+(\.\d+)?" title="Please enter a decimal number" required>
+    
+    <br>
+    <button class="btn btn-dark" type="submit" name="submit">Submit</button>
+</form>
+
+    </div>
+
+    <!-- Model Evaluation Metrics Section -->
+    <!-- Model Evaluation Metrics Section -->
+{% if metrics %}
+<div class="container p-3 my-3 bg-secondary text-white">
+    <h5>Model Evaluation Metrics</h5>
+    <table class="table table-bordered" style="background-color: #CCCCCC;">
+        <thead>
+            <tr>
+                <th>Metric</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key, value in metrics.items() %}
+            <tr>
+                <td>{{ key }}</td>
+                <td>{{ value|round(2) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+
+    <!-- Iris Information Cards -->
+<div class="container">
+    <div class="card-deck mb-3 text-center">
+        <!-- Setosa Card -->
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Setosa</h4>
+            </div>
+            <div class="card-body">
+                <img src="../static/resized_setosa.jpg" alt="Setosa" class="card-img mb-3 rounded-circle">
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li class="text-justify">Iris setosa has a deep violet blue flower, The sepals are deeply-veined dark purple with a yellow-white signal, The petals are very reduced in size, not exceeding the base of the sepals, Iris setosa is a species in the genus Iris, It is found across the Arctic regions.</li>
+                </ul>
+                {% if setosa %}
+                <span class="tick" style="font-size: 24px;">&#10004;</span>
+                {% endif %}
+            </div>
+        </div>
+        <!-- Virginica Card -->
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Virginica</h4>
+            </div>
+            <div class="card-body">
+                <img src="../static/resized_virginica.jpg" alt="Virginica" class="card-img mb-3 rounded-circle">
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li class="text-justify">Iris virginica has a light blue to deep violet, rarely white, flower, The sepals are spreading with darker blue to purple veins with a light yellow pubescent signal. Southern blue flag iris flowers in late spring, It  is native to eastern North America.</li>
+                </ul>
+                {% if virginica %}
+                <span class="tick" style="font-size: 24px;">&#10004;</span>
+                {% endif %}
+            </div>
+        </div>
+        <!-- Versicolor Card -->
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Versicolor</h4>
+            </div>
+            <div class="card-body">
+                <img src="../static/resized_versicolor.jpg" alt="Versicolor" class="card-img mb-3 rounded-circle">
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li class="text-justify">Iris versicolor has a deep blue to purple, rarely white flower, The spreading sepals have purple veins as they gradually narrow to a white base, with a pubescent, greenish yellow signal, Iris versicolor is a species of Iris, It is native to North America.</li>
+                </ul>
+                {% if versicolor %}
+                <span class="tick" style="font-size: 24px;">&#10004;</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
+
